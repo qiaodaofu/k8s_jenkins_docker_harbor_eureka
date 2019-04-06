@@ -12,11 +12,6 @@ pipeline {
         string(name: 'K8S_NAMESPACE', defaultValue: 'develop', description: 'k8s的namespace名称')
     }
     stages {
-
-        stage('checkout'){
-                checkout scm
-        }
-
         stage('Maven Build') {
             when { expression { env.GIT_TAG != null } }
             agent {
@@ -32,7 +27,7 @@ pipeline {
 
         }
         stage('Docker Build') {
-            when {
+            when { 
                 allOf {
                     expression { env.GIT_TAG != null }
                 }
@@ -45,10 +40,10 @@ pipeline {
                 sh "docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
                 sh "docker rmi ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
             }
-
+            
         }
         stage('Deploy') {
-            when {
+            when { 
                 allOf {
                     expression { env.GIT_TAG != null }
                 }
@@ -64,8 +59,8 @@ pipeline {
                 sh "sed -e 's#{IMAGE_URL}#${params.HARBOR_HOST}/${params.DOCKER_IMAGE}#g;s#{IMAGE_TAG}#${GIT_TAG}#g;s#{APP_NAME}#${params.APP_NAME}#g;s#{SPRING_PROFILE}#k8s-test#g' k8s-deployment.tpl > k8s-deployment.yml"
                 sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
             }
-
+            
         }
-
+        
     }
 }

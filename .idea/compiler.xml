@@ -9,9 +9,6 @@
         <module name="k8s_jenkins_demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="k8s_jenkins_demo" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

@@ -9,7 +9,7 @@ pipeline {
         string(name: 'HARBOR_HOST', defaultValue: '192.168.137.134:5000', description: 'harbor仓库地址')
         string(name: 'DOCKER_IMAGE', defaultValue: 'library/eureka', description: 'docker镜像名')
         string(name: 'APP_NAME', defaultValue: 'eureka', description: 'k8s中标签名')
-        string(name: 'K8S_NAMESPACE', defaultValue: 'Deployment', description: 'k8s的namespace名称')
+        string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
     }
     stages {
         stage('Maven Build') {

@@ -1,5 +1,5 @@
-apiVersion: v1
-kind: default
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {APP_NAME}-deployment
   labels:

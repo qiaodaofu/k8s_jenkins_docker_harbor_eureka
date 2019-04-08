@@ -2,3 +2,5 @@ target/classes/com/example/k8s_jenkins_demo/controller/TestController.class
 target/classes/com/example/k8s_jenkins_demo/Callenable$As.class
 src/main/java/com/example/k8s_jenkins_demo/Callenable.java
 target/classes/com/example/k8s_jenkins_demo/Callenable.class
+.idea
+.idea/workspace.xml

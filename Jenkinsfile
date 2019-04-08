@@ -7,8 +7,8 @@ pipeline {
     }
     parameters {
         string(name: 'HARBOR_HOST', defaultValue: '192.168.137.134:5000', description: 'harbor仓库地址')
-        string(name: 'DOCKER_IMAGE', defaultValue: 'library/{APP_NAME}', description: 'docker镜像名')
-        string(name: 'APP_NAME', defaultValue: '{APP_NAME}', description: 'k8s中标签名')
+        string(name: 'DOCKER_IMAGE', defaultValue: 'library/test', description: 'docker镜像名')
+        string(name: 'APP_NAME', defaultValue: 'test', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
     }
     stages {

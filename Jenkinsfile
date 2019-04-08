@@ -18,10 +18,10 @@ pipeline {
                 docker {
                     image 'maven:3-jdk-8-alpine'
                     args '-v $HOME/.m2:/root/.m2'
-                    echo 'aa'
                 }
             }
             steps {
+                echo 'aa'
                 sh 'mvn clean package -D file.encoding=UTF-8 -D skipTests=true'
                 stash includes: 'target/*.jar', name: 'app'
             }

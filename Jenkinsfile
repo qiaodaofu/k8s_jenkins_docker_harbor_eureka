@@ -4,7 +4,6 @@ pipeline {
         HARBOR_CREDS = credentials('jenkins-harbor-creds')
         K8S_CONFIG = credentials('jenkins-k8s-config')
         GIT_TAG = sh(returnStdout: true,script: 'git describe --tags').trim()
-        echo 'GIT_TAG'
     }
     parameters {
         string(name: 'HARBOR_HOST', defaultValue: '192.168.137.134:5000', description: 'harbor仓库地址')
@@ -19,6 +18,7 @@ pipeline {
                 docker {
                     image 'maven:3-jdk-8-alpine'
                     args '-v $HOME/.m2:/root/.m2'
+                    echo 'GIT_TAG'
                 }
             }
             steps {

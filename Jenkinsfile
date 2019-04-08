@@ -56,7 +56,6 @@ pipeline {
                 sh "mkdir -p ~/.kube"
                 sh "echo ${K8S_CONFIG} | base64 -d > ~/.kube/config"
                 sh "sed -e 's#{IMAGE_URL}#${params.HARBOR_HOST}/${params.DOCKER_IMAGE}#g;s#{IMAGE_TAG}#${GIT_TAG}#g;s#{APP_NAME}#${params.APP_NAME}#g;s#{SPRING_PROFILE}#k8s-test#g' k8s-deployment.tpl > k8s-deployment.yml"
-                sh "kubectl delete -n ${params.K8S_NAMESPACE} ${params.K8S_NAMESPACE}.apps/${params.APP_NAME}-deployment"
                 sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
             }
         }

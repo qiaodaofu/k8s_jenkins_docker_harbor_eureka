@@ -7,8 +7,8 @@ pipeline {
     }
     parameters {
         string(name: 'HARBOR_HOST', defaultValue: '192.168.137.134:5000', description: 'harbor仓库地址')
-        string(name: 'DOCKER_IMAGE', defaultValue: 'library/eureka', description: 'docker镜像名')
-        string(name: 'APP_NAME', defaultValue: 'eureka', description: 'k8s中标签名')
+        string(name: 'DOCKER_IMAGE', defaultValue: 'library/{APP_NAME}', description: 'docker镜像名')
+        string(name: 'APP_NAME', defaultValue: '{APP_NAME}', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
     }
     stages {
@@ -24,7 +24,6 @@ pipeline {
                 sh 'mvn clean package -D file.encoding=UTF-8 -D skipTests=true'
                 stash includes: 'target/*.jar', name: 'app'
             }
-
         }
         stage('Docker Build') {
             when {
@@ -40,7 +39,6 @@ pipeline {
                 sh "docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
                 sh "docker rmi ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
             }
-
         }
         stage('Deploy') {
             when {
@@ -59,8 +57,6 @@ pipeline {
                 sh "sed -e 's#{IMAGE_URL}#${params.HARBOR_HOST}/${params.DOCKER_IMAGE}#g;s#{IMAGE_TAG}#${GIT_TAG}#g;s#{APP_NAME}#${params.APP_NAME}#g;s#{SPRING_PROFILE}#k8s-test#g' k8s-deployment.tpl > k8s-deployment.yml"
                 sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
             }
-
         }
-
     }
 }

@@ -19,8 +19,8 @@ spec:
         image: {IMAGE_URL}:{IMAGE_TAG}
         ports:
         - containerPort: 8081
-		  protocol: TCP
-		  hostPort: 8081
+          protocol: TCP
+          hostPort: 8081
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: {SPRING_PROFILE}

@@ -21,7 +21,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'aa'
+                echo  env.GIT_TAG
                 sh 'mvn clean package -D file.encoding=UTF-8 -D skipTests=true'
                 stash includes: 'target/*.jar', name: 'app'
             }

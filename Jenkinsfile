@@ -4,6 +4,7 @@ pipeline {
         HARBOR_CREDS = credentials('jenkins-harbor-creds')
         K8S_CONFIG = credentials('jenkins-k8s-config')
         GIT_TAG = sh(returnStdout: true,script: 'git describe --tags').trim()
+        echo 'GIT_TAG'
     }
     parameters {
         string(name: 'HARBOR_HOST', defaultValue: '192.168.137.134:5000', description: 'harbor仓库地址')

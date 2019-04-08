@@ -2,6 +2,7 @@ FROM openjdk:8-jdk-alpine
 
 #构建参数
 ARG JAR_FILE
+# 这个指定的路径是项目在docker中的工作地址
 ARG WORK_PATH="/opt/demo"
 # 环境变量
 ENV JAVA_OPTS="" \
@@ -12,7 +13,7 @@ ENV JAVA_OPTS="" \
 #    apk add tzdata && \
 #    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 #    echo "Asia/Shanghai" > /etc/timezone
-
+#把target 下的
 COPY target/$JAR_FILE $WORK_PATH/
 
 WORKDIR $WORK_PATH

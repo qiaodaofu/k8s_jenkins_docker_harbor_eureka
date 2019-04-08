@@ -18,7 +18,7 @@ pipeline {
                 docker {
                     image 'maven:3-jdk-8-alpine'
                     args '-v $HOME/.m2:/root/.m2'
-                    echo 'GIT_TAG'
+                    echo 'aa'
                 }
             }
             steps {

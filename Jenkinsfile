@@ -10,6 +10,9 @@ pipeline {
         string(name: 'DOCKER_IMAGE', defaultValue: 'library/test', description: 'docker镜像名')
         string(name: 'APP_NAME', defaultValue: 'test', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
+		text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '测试')
+		choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '下拉列表')
+		file(name: "FILE", description: "Choose a file to upload")
     }
     stages {
         stage('Maven Build') {
@@ -56,11 +59,7 @@ pipeline {
                 sh "mkdir -p ~/.kube"
                 sh "echo ${K8S_CONFIG} | base64 -d > ~/.kube/config"
                 sh "sed -e 's#{IMAGE_URL}#${params.HARBOR_HOST}/${params.DOCKER_IMAGE}#g;s#{IMAGE_TAG}#${GIT_TAG}#g;s#{APP_NAME}#${params.APP_NAME}#g;s#{SPRING_PROFILE}#k8s-test#g' k8s-deployment.tpl > k8s-deployment.yml"
-				try {
-					sh "kubectl delete -n ${params.K8S_NAMESPACE} ${params.K8S_NAMESPACE}.apps/${params.APP_NAME}-deployment"
-				}catch (exc) {
-					sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
-				}
+			    sh "kubectl delete -n ${params.K8S_NAMESPACE} ${params.K8S_NAMESPACE}.apps/${params.APP_NAME}-deployment"
 				sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
             }
         }

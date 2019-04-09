@@ -10,7 +10,7 @@ public class TestController {
     @RequestMapping("getTest")
     public Object getTest(){
         System.out.println("11");
-        return "辛苦了!!!";
+        return "辛苦了!!!!!!";
     }
 
 }

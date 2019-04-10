@@ -63,7 +63,6 @@ pipeline {
 				}catch(err){
 					sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
 				}
-				#sh "kubectl delete -n ${params.K8S_NAMESPACE} ${params.K8S_NAMESPACE}.apps/${params.APP_NAME}-deployment"
 				sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
             }
         }

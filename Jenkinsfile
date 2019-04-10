@@ -63,6 +63,9 @@ pipeline {
 				}catch(err){
 					sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
 				}
+				finally {
+				    echo "执行了"
+				}
 				sh "kubectl apply -f k8s-deployment.yml --namespace=${params.K8S_NAMESPACE}"
             }
         }

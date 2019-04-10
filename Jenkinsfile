@@ -11,7 +11,7 @@ pipeline {
         string(name: 'APP_NAME', defaultValue: 'test', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
 		text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '测试')
-		choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '下拉列表')
+		choice(name: 'CHOICES', choices: [GIT_TAG], description: '下拉列表')
 		file(name: "FILE", description: "Choose a file to upload")
     }
     stages {

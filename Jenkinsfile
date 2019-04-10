@@ -10,7 +10,7 @@ pipeline {
         string(name: 'DOCKER_IMAGE', defaultValue: 'library/test', description: 'docker镜像名')
         string(name: 'APP_NAME', defaultValue: 'test', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
-		choice(name: 'CHOICES', choices: [GIT_TAG], description: '下拉列表')
+		choice(name: 'CHOICES', choices: [${GIT_TAG}], description: '下拉列表')
 		
     }
     stages {

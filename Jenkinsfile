@@ -10,9 +10,8 @@ pipeline {
         string(name: 'DOCKER_IMAGE', defaultValue: 'library/test', description: 'docker镜像名')
         string(name: 'APP_NAME', defaultValue: 'test', description: 'k8s中标签名')
         string(name: 'K8S_NAMESPACE', defaultValue: 'deployment', description: 'k8s的namespace名称')
-		text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '测试')
 		choice(name: 'CHOICES', choices: [GIT_TAG], description: '下拉列表')
-		file(name: "FILE", description: "Choose a file to upload")
+		
     }
     stages {
         stage('Maven Build') {
